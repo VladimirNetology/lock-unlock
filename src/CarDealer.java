@@ -4,11 +4,16 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class CarDealer {
-    public static final int MILLIS_DELIVERY = 5000;
-    public static final int MILLIS_SELL = 2000;
-    public List<Car> cars = new ArrayList<>();
-    ReentrantLock lock = new ReentrantLock();
-    Condition condition = lock.newCondition();
+    private final int MILLIS_DELIVERY;
+    private final int MILLIS_SELL;
+    private final List<Car> cars = new ArrayList<>();
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Condition condition = lock.newCondition();
+
+    public CarDealer(int MILLIS_DELIVERY, int MILLIS_SELL) {
+        this.MILLIS_DELIVERY = MILLIS_DELIVERY;
+        this.MILLIS_SELL = MILLIS_SELL;
+    }
 
     public void deliverCar() {
         try {
